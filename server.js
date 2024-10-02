@@ -13,7 +13,7 @@ app.use(express.json());
 // API endpoints
 
 // GET all courses
-app.get("/api/courses", function (req, res) {
+app.get("/api/courses", function (_req, res) {
     console.log("LOG: Got a GET request for all courses");
 
     let data = fs.readFileSync(__dirname + "/data/" + "courses.json", "utf8");
@@ -23,7 +23,7 @@ app.get("/api/courses", function (req, res) {
     console.log("LOG: Returned courses -> ");
     console.log(data);
 
-    res.end(JSON.stringify(data));
+    res.json(data);
 });
 
 // GET one course by id
@@ -40,7 +40,7 @@ app.get("/api/courses/:id", function (req, res) {
     // If course not found
     if (match == undefined) {
         console.log("LOG: **NOT FOUND**: course " + id + " does not exist!");
-        res.status(404).send();   // not found
+        res.status(404).end();   // not found
         return;
     }
 
@@ -48,7 +48,7 @@ app.get("/api/courses/:id", function (req, res) {
     console.log("LOG: Returned course -> ");
     console.log(match);
 
-    res.end(JSON.stringify(match));
+    res.json(match);
 });
 
 // POST a course to be added
@@ -62,7 +62,7 @@ app.post("/api/courses", urlencodedParser, function (req, res) {
         !req.body.instructor || !req.body.startDate || !req.body.numDays) {
 
         console.log("LOG: **MISSING DATA**: one or more course properties missing");
-        res.status(400).send();   // can't process due to 1 or more missing properties
+        res.status(400).end();   // can't process due to 1 or more missing properties
         return;
     }
 
@@ -126,7 +126,7 @@ app.put("/api/courses/:id", function (req, res) {
     // If course not found
     if (match == undefined) {
         console.log("LOG: **NOT FOUND**: course " + id + " does not exist!");
-        res.status(404).send();   // not found
+        res.status(404).end();   // not found
         return;
     }
 
@@ -158,7 +158,7 @@ app.put("/api/courses/:id", function (req, res) {
     console.log("LOG: Updated course is -> ");
     console.log(match);
 
-    res.status(200).send();
+    res.status(200).end();
 })
 
 // DELETE a specific course
@@ -185,7 +185,7 @@ app.delete("/api/courses/:id", function (req, res) {
     // Note:  not found is not an error, because the goal is
     //        for it to be gone!
 
-    res.status(200).send();
+    res.status(200).end();
 })
 
 /////////////////////////////////////////////////////
