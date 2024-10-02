@@ -1,8 +1,8 @@
 # Courses API Express Server
-This is intended to be the backend for the Courses API exercises.
+This is the full backend for the Courses API exercises and supports GET, POST, PUT and DELETE endpoints for courses.
 
 ## Setup this server locally
-This section will discuss how to get the Courses API server up and running locally
+This section discusses how to get the Courses API server up and running locally
 
 - Verify Node.js is installed by running the following command.
   
@@ -12,7 +12,7 @@ This section will discuss how to get the Courses API server up and running local
   ```
   **Sample Output**
   ```bash
-    v14.15.4     (or something similar)
+    v20.17.0     (or something similar)
   ```
 
   > **Note:** If you do not have Node.js installed you can install the LTS (Long-term Support) version from here: https://nodejs.org/en/
